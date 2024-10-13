@@ -9,9 +9,9 @@ async function bootstrap() {
   //Swagger 문서 설정
   const config = new DocumentBuilder()
     .setTitle('스웨거')
-    .setDescription('스웨거 설명')
-    .setVersion('1.0')
-    .addTag('테스트')
+    .setDescription('화이트클리닉 Swagger')
+    .setVersion('최신버전')
+    .addTag('화이트클리닉의 모든 경로')
     .build();
 
   //Swagger 문서 생성

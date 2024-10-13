@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Engineer } from './Engineer.entity';
 
 @Entity('engineer_dailyearnings')
 export class engineerDailyearnings {
@@ -10,4 +11,7 @@ export class engineerDailyearnings {
 
   @Column({ name: 'daily_amount' })
   dailyAmount: number;
+
+  @ManyToMany(() => Engineer)
+  engineer: Engineer;
 }
