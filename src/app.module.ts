@@ -8,15 +8,19 @@ import { EngineerSalary } from './whiteClinic/entity/EngineerSalary.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '0000',
-      database: 'whiteclinic',
+      type: 'postgres',
+      host: 'ep-rough-king-a426uv30-pooler.us-east-1.aws.neon.tech',
+      port: 5432,
+      username: 'default',
+      password: 'xMgC19jsebJo',
+      database: 'verceldb',
       entities: [Engineer, EngineerSalary],
       synchronize: false,
+      ssl: {
+        rejectUnauthorized: false,
+      },
     }),
+
     EngineerModule,
   ],
 })

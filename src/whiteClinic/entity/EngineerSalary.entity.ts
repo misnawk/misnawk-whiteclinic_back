@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 @Entity('Salary')
 export class EngineerSalary {
   @PrimaryGeneratedColumn()
-  engineerId: number; // 엔지니어 ID
+  id: number; // 엔지니어 ID
 
   @Column()
   salaryDay: string; // 수당 날짜

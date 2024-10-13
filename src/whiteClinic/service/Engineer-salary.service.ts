@@ -15,7 +15,7 @@ export class EngineerSalaryService {
   async getEngineerSalary(id: number): Promise<any> {
     const query = `
     SELECT * FROM salary
-    WHERE engineerId = ?;
+    WHERE id = ?;
   `;
 
     return await this.EngineerSalaryRepository.query(query, [id]);
