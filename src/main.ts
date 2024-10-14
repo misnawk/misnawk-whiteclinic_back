@@ -8,6 +8,7 @@ async function bootstrap() {
 
   //Swagger 문서 설정
   const config = new DocumentBuilder()
+    .addServer('https://whiteclinic-front.vercel.app')
     .setTitle('스웨거')
     .setDescription('화이트클리닉 Swagger')
     .setVersion('최신버전')
