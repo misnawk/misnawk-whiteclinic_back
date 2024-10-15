@@ -4,6 +4,8 @@ import { Engineer } from './whiteClinic/entity/Engineer.entity';
 import { EngineerModule } from './whiteClinic/module/Engineer.module';
 import { EngineerSalaryService } from './whiteClinic/service/Engineer-salary.service';
 import { EngineerSalary } from './whiteClinic/entity/EngineerSalary.entity';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -22,6 +24,10 @@ import { EngineerSalary } from './whiteClinic/entity/EngineerSalary.entity';
     }),
 
     EngineerModule,
+
+    AuthModule,
+
+    UsersModule,
   ],
 })
 export class AppModule {}

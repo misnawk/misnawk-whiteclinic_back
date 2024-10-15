@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post } from '@nestjs/common';
 import { EngineerService } from '../service/Engineer.service';
 import { Engineer } from '../entity/Engineer.entity';
 import { EngineerSalary } from '../entity/EngineerSalary.entity';
