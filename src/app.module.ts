@@ -9,6 +9,8 @@ import { UsersModule } from './users/users.module';
 import { CatController } from './cat/cat.controller';
 import { CatService } from './cat/cat.service';
 import { CatModule } from './cat/cat.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './auth/auth.guard';
 
 @Module({
   imports: [
@@ -35,6 +37,12 @@ import { CatModule } from './cat/cat.module';
     CatModule,
   ],
   controllers: [CatController],
-  providers: [CatService],
+  providers: [
+    CatService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
 })
 export class AppModule {}

@@ -1,5 +1,15 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Post,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { AuthGuard } from './auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -14,5 +24,12 @@ export class AuthController {
 
     //userName은 키가 되는것이고, password는 값이 된다.
     return this.authService.signIn(signInDto.userName, signInDto.password);
+  }
+
+  @UseGuards(AuthGuard)
+
+  @Get('profile')
+  getProfile(@Request() req) {
+    return req.user;
   }
 }

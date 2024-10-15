@@ -3,6 +3,8 @@ import { EngineerService } from '../service/Engineer.service';
 import { Engineer } from '../entity/Engineer.entity';
 import { EngineerSalary } from '../entity/EngineerSalary.entity';
 import { EngineerSalaryService } from '../service/Engineer-salary.service';
+import { Roles } from 'src/auth/roles.decorator';
+import { Role } from 'src/auth/role.enum';
 
 @Controller('engineer')
 export class EngineerController {
@@ -21,6 +23,7 @@ export class EngineerController {
   }
 
   @Get('salary/:id')
+  @Roles(Role.Admin)
   async getEngineerSalary(@Param('id') id: number): Promise<EngineerSalary[]> {
     const EngineerSalaryData =
       await this.engineerSalaryService.getEngineerSalary(id);
