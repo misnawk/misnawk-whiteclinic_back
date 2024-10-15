@@ -1,27 +1,35 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { promises } from 'dns';
+import {
+  Dependencies,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
+import { JwtService } from '@nestjs/jwt';
+import { access } from 'fs';
 
 @Injectable()
 export class AuthService {
-  //인스턴스 주입
-  constructor(private userService: UsersService) {}
+  //의존성을 주입해주었다.
+  constructor(
+    private userService: UsersService,
+    private jwtService: JwtService,
+  ) {}
 
-  // 서버는 동시에 작업을 해야하는 상황이 있기에 비동기 로직으로 구현
-  async signIn(userName: string, pass: string): Promise<any> {
-    // userService에서 findone 함수를 사용해서 일치하는 이름을 가진 정보를 담아줌
+  //signIn 함수는 매개변수로 이름과 비밀번호를 받는다.
+  async signIn(userName, pass) {
+    //userService에 접근해서 findOne 함수에 userName을 넣어준다.
+    //그후 findOne 함수에 의해서 이름과 일치하는 사용자의 정보가 user에 담긴다.
     const user = await this.userService.findOne(userName);
-    console.log(user);
-
-    //일치하는 정보가 없다면 예외 발생
-    if (user?.password !== pass) {
-      console.log('일치하는 정보가 없음');
-
+    // 만약 이름은 일치하지만 pass 가 다른경우라면
+    if (user?.password != pass) {
+      //오류를 발생시킨다.
       throw new UnauthorizedException();
     }
-    //password 를 제외한 나머지 사용자의 정보를 result에 담는다.
-    const { password, ...result } = user;
-
-    return result;
+    // 사용자의 이름과 아이디를 payload에 담아준다.
+    const payload = { userName: user.userName, sub: user.userId };
+    return {
+      // payload에 담긴 정보를 통해서 토큰을 생성한다.
+      access_token: await this.jwtService.signAsync(payload),
+    };
   }
 }

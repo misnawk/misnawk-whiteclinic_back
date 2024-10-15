@@ -7,7 +7,6 @@ export class AuthController {
 
   // http 상태코드를 명시적으로 설정할 때 사용
   @HttpCode(HttpStatus.OK)
-  //post요청 받음
   @Post('login')
   // @Body()를 사용해서 클라이언트의 데이터를 key와 value느낌으로 받을수있다.
   signIn(@Body() signInDto: Record<string, any>) {

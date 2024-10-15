@@ -6,6 +6,9 @@ import { EngineerSalaryService } from './whiteClinic/service/Engineer-salary.ser
 import { EngineerSalary } from './whiteClinic/entity/EngineerSalary.entity';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { CatController } from './cat/cat.controller';
+import { CatService } from './cat/cat.service';
+import { CatModule } from './cat/cat.module';
 
 @Module({
   imports: [
@@ -28,6 +31,10 @@ import { UsersModule } from './users/users.module';
     AuthModule,
 
     UsersModule,
+
+    CatModule,
   ],
+  controllers: [CatController],
+  providers: [CatService],
 })
 export class AppModule {}
